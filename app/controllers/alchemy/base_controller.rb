@@ -57,7 +57,7 @@ module Alchemy
 #{current_alchemy_user.inspect}
 WARN
       end
-      if current_alchemy_user
+      if public_send Alchemy.current_user_method
         handle_redirect_for_user
       else
         handle_redirect_for_guest
