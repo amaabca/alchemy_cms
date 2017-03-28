@@ -90,7 +90,8 @@ WARN
     end
 
     def handle_redirect_for_guest
-      flash[:info] = Alchemy.t('Please log in')
+      # this flash message should be configurable. no need to set flash for omniauth solutions
+      # flash[:info] = Alchemy.t('Please log in')
       if request.xhr?
         render :permission_denied
       else
