@@ -17,6 +17,7 @@ spec/dummy/public/assets
 *.gem
 /index/
 /.bundle/
+/vendor/bundle
 .rbenv-version
 .ruby-gemset
 .ruby-version
