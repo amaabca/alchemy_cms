@@ -321,9 +321,15 @@ module Alchemy
     #   Pass an element name to get previous of this kind.
     #
     def previous_or_next(dir, name = nil)
-      elements = page.elements.published.where("#{self.class.table_name}.position #{dir} #{position}")
+      options = if dir == '>'
+                  {order: :asc, direction: dir}
+                else
+                  {order: :desc, direction: '<'}
+                end
+      query = "#{self.class.table_name}.position #{options[:direction]} ?"
+      elements = page.elements.published.where(query, position)
       elements = elements.named(name) if name.present?
-      elements.reorder("position #{dir == '>' ? 'ASC' : 'DESC'}").limit(1).first
+      elements.reorder(position: options[:order]).limit(1).first
     end
 
     # Returns all cells from given page this element could be placed in.
